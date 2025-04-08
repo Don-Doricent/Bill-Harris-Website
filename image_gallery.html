@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            padding: 10px;
+            width: 100%;
+            max-width: 1200px;
+        }
+        .image-grid img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .image-grid img:hover {
+            transform: scale(1.05);
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            justify-content: center;
+            align-items: center;
+        }
+        .modal img {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .modal:target {
+            display: flex;
+        }
+    </style>
+</head>
+<body>
+    <div class="image-grid">
+
+        <a href="#modal-xvanishing_point.jpg">
+            <img src="xvanishing_point.jpg" alt="xvanishing_point.jpg">
+        </a>
+        <div id="modal-xvanishing_point.jpg" class="modal">
+            <img src="xvanishing_point.jpg" alt="xvanishing_point.jpg">
+        </div>
+    
+        <a href="#modal-xvintage.jpg">
+            <img src="xvintage.jpg" alt="xvintage.jpg">
+        </a>
+        <div id="modal-xvintage.jpg" class="modal">
+            <img src="xvintage.jpg" alt="xvintage.jpg">
+        </div>
+    
+        <a href="#modal-xwasted-and-wounded.jpg">
+            <img src="xwasted-and-wounded.jpg" alt="xwasted-and-wounded.jpg">
+        </a>
+        <div id="modal-xwasted-and-wounded.jpg" class="modal">
+            <img src="xwasted-and-wounded.jpg" alt="xwasted-and-wounded.jpg">
+        </div>
+    
+        <a href="#modal-xwaters_edge_april.jpg">
+            <img src="xwaters_edge_april.jpg" alt="xwaters_edge_april.jpg">
+        </a>
+        <div id="modal-xwaters_edge_april.jpg" class="modal">
+            <img src="xwaters_edge_april.jpg" alt="xwaters_edge_april.jpg">
+        </div>
+    
+        <a href="#modal-xwhat-i-want.jpg">
+            <img src="xwhat-i-want.jpg" alt="xwhat-i-want.jpg">
+        </a>
+        <div id="modal-xwhat-i-want.jpg" class="modal">
+            <img src="xwhat-i-want.jpg" alt="xwhat-i-want.jpg">
+        </div>
+    
+        <a href="#modal-xwork.jpg">
+            <img src="xwork.jpg" alt="xwork.jpg">
+        </a>
+        <div id="modal-xwork.jpg" class="modal">
+            <img src="xwork.jpg" alt="xwork.jpg">
+        </div>
+    
+        <a href="#modal-xyou-and-i.jpg">
+            <img src="xyou-and-i.jpg" alt="xyou-and-i.jpg">
+        </a>
+        <div id="modal-xyou-and-i.jpg" class="modal">
+            <img src="xyou-and-i.jpg" alt="xyou-and-i.jpg">
+        </div>
+    
+        <a href="#modal-xyours_and_mine.jpg">
+            <img src="xyours_and_mine.jpg" alt="xyours_and_mine.jpg">
+        </a>
+        <div id="modal-xyours_and_mine.jpg" class="modal">
+            <img src="xyours_and_mine.jpg" alt="xyours_and_mine.jpg">
+        </div>
+    
+        <a href="#modal-you-and-i.jpg">
+            <img src="you-and-i.jpg" alt="you-and-i.jpg">
+        </a>
+        <div id="modal-you-and-i.jpg" class="modal">
+            <img src="you-and-i.jpg" alt="you-and-i.jpg">
+        </div>
+    
+        <a href="#modal-yours_and_mine.jpg">
+            <img src="yours_and_mine.jpg" alt="yours_and_mine.jpg">
+        </a>
+        <div id="modal-yours_and_mine.jpg" class="modal">
+            <img src="yours_and_mine.jpg" alt="yours_and_mine.jpg">
+        </div>
+    
+    </div>
+</body>
+</html>

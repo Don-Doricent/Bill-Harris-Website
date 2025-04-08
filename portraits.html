@@ -1,0 +1,498 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Portraits</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+        <meta name="description" content="View lifelike oil portraits by Bill Harris, a Fredericksburg, VA artist known for capturing personality and emotion in every painting.">
+		<link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="icon" href="favicons/profile.png">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Gallery CSS */
+            .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Flexible columns */
+            gap: 10px; /* Spacing between images */
+            padding: 10px;
+        }
+
+        .gallery img {
+            width: 100%; /* Makes the image fill its container */
+            height: 200px; /* Set a uniform height */
+            object-fit: cover; /* Ensures the image fits without distortion */
+            border-radius: 5px; /* Optional: rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for aesthetic */
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        /* Lightbox CSS */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .lightbox .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .lightbox .arrow.left {
+            left: 10px;
+        }
+
+        .lightbox .arrow.right {
+            right: 10px;
+        }
+
+        body.no-scroll {
+        overflow: hidden;
+    }
+
+        
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header" class="alt style2">
+				<a href="index.html" class="logo"><strong>Portraits</strong> <span>Art Collection</span></a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+                <ul class="links">
+                    <li><a href="studio.html">Studio</a></li>
+                    <li><a href="paintings.html">Paintings</a></li>
+                    <li><a href="murals.html">Murals</a></li>
+                    <li><a href="illustrations.html">Illustrations</a></li>
+                    
+                </ul>
+                <ul class="actions stacked">
+                    <li><a href="index.html" class="button primary fit">Home</a></li>
+                    <!-- <li><a href="#" class="button fit">Log In</a></li> -->
+                </ul>
+            </nav>
+
+			<!-- Banner -->
+			<section id="banner" class="style2">
+				<div class="inner">
+					<span class="image">
+						<img src="images/art-banner.jpg" alt="Paintings Banner" />
+					</span>
+					<header class="major">
+						<h1>Portraits</h1>
+					</header>
+					<div class="content">
+						<p>Every face tells a story—capturing emotion, personality,<br /> and depth through color, light, and detail.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Main Gallery Section -->
+			<div id="gallery" class="gallery"></div>
+
+            <!-- Lightbox -->
+        <div id="lightbox" class="lightbox">
+            <span class="arrow left">&#10094;</span>
+            <span class="close">&times;</span>
+            <span class="arrow right">&#10095;</span>
+            <img src="" alt="Painting" />
+        </div>
+
+    <script>
+        // Copy the generated array here
+        const imageList = [
+            "images/portraits/busler-portrait.jpg",
+  "images/portraits/howard-portrait.jpg",
+  "images/portraits/owen-portrait.jpg",
+  "images/portraits/painting75.jpg",
+  "images/portraits/phil.jpg",
+  "images/portraits/portrait1.jpg",
+  "images/portraits/portrait10.jpg",
+  "images/portraits/portrait11.jpg",
+  "images/portraits/portrait12.jpg",
+  "images/portraits/portrait13.jpg",
+  "images/portraits/portrait14.jpg",
+  "images/portraits/portrait15.jpg",
+  "images/portraits/portrait18.jpg",
+  "images/portraits/portrait19.jpg",
+  "images/portraits/portrait2.jpg",
+  "images/portraits/portrait20.jpg",
+  "images/portraits/portrait21.jpg",
+  "images/portraits/portrait22.jpg",
+  "images/portraits/portrait23.jpg",
+  "images/portraits/portrait24.jpg",
+  "images/portraits/portrait25.jpg",
+  "images/portraits/portrait26.jpg",
+  "images/portraits/portrait27.jpg",
+  "images/portraits/portrait28.jpg",
+  "images/portraits/portrait29.jpg",
+  "images/portraits/portrait3.jpg",
+  "images/portraits/portrait30.jpg",
+  "images/portraits/portrait31.jpg",
+  "images/portraits/portrait32.jpg",
+  "images/portraits/portrait33.jpg",
+  "images/portraits/portrait34.jpg",
+  "images/portraits/portrait35.jpg",
+  "images/portraits/portrait36.jpg",
+  "images/portraits/portrait37.jpg",
+  "images/portraits/portrait38.jpg",
+  "images/portraits/portrait39.jpg",
+  "images/portraits/portrait4.jpg",
+  "images/portraits/portrait40.jpg",
+  "images/portraits/portrait41.jpg",
+  "images/portraits/portrait42.jpg",
+  "images/portraits/portrait43.jpg",
+  "images/portraits/portrait44.jpg",
+  "images/portraits/portrait45.jpg",
+  "images/portraits/portrait46.jpg",
+  "images/portraits/portrait47.jpg",
+  "images/portraits/portrait48.jpg",
+  "images/portraits/portrait49.jpg",
+  "images/portraits/portrait5.jpg",
+  "images/portraits/portrait50.jpg",
+  "images/portraits/portrait51.jpg",
+  "images/portraits/portrait52.jpg",
+  "images/portraits/portrait53.jpg",
+  "images/portraits/portrait54.jpg",
+  "images/portraits/portrait55.jpg",
+  "images/portraits/portrait6.jpg",
+  "images/portraits/portrait7.jpg",
+  "images/portraits/portrait8.jpg",
+  "images/portraits/portrait9.jpg",
+  "images/portraits/portraitbabycows.jpg",
+  "images/portraits/portraitcamp.jpg",
+  "images/portraits/portraitchildren2015.jpg",
+  "images/portraits/portraitindian.jpg",
+  "images/portraits/portraitkellen.jpg",
+  "images/portraits/portraitkids.jpg",
+  "images/portraits/rose-portrait.jpg",
+  "images/portraits/sarah.jpg",
+];
+    </script>
+			</div>
+
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Three -->
+    <section id="three">
+        <div class="inner">
+            <header class="major">
+                <h2>Learn, Create, and Connect</h2>
+            </header>
+            <p>Interested in developing your artistic skills? <br><br> I offer oil painting classes for all experience levels. 
+                Whether you want to explore new techniques, commission a custom piece, or simply learn more about my work, feel free to reach out!
+                </p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="inner">
+          <section>
+            <form method="POST" action="https://formsubmit.co/DDoricent97@gmail.com">
+              <!-- Optional Hidden Inputs -->
+              <input type="hidden" name="_captcha" value="false">
+              
+
+              <div class="fields">
+                <div class="field half">
+                  <label for="name">Name</label>
+                  <input type="text" name="name" id="name" required />
+                </div>
+                <div class="field half">
+                  <label for="email">Email</label>
+                  <input type="email" name="email" id="email" required />
+                </div>
+                <div class="field">
+                  <label for="message">Message</label>
+                  <textarea name="message" id="message" rows="6" required></textarea>
+                </div>
+              </div>
+              <ul class="actions">
+                <li><input type="submit" value="Send Message" class="primary" /></li>
+                <li><input type="reset" value="Clear" /></li>
+              </ul>
+            </form>
+            <div id="thankYouPopup" style="
+                display: none;
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                background: #1e2331; /* dark background to match theme */
+                padding: 2em;
+                border-radius: 8px;
+                box-shadow: 0 0 20px rgba(0,0,0,0.6);
+                z-index: 99999;
+                text-align: center;
+                font-family: 'Cormorant Garamond', serif;
+                color: white; /* make text visible */
+                ">
+                <p style="margin: 0 0 1em;">Thank you for your message!</p>
+                <button onclick="closePopup()" style="
+                    background: transparent;
+                    color: white;
+                    border: 2px solid white;
+                    padding: 0.5em 1.5em;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    text-transform: uppercase;
+                    transition: background 0.2s, color 0.2s;
+                " onmouseover="this.style.background='white'; this.style.color='#1e2331'" onmouseout="this.style.background='transparent'; this.style.color='white'">
+                    Close
+                </button>
+            </div>
+
+
+          </section>
+            <section class="split">
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-envelope"></span>
+                        <h3>Email</h3>
+                        <a href="mailto:BillHarrisArt@gmail.com">BillHarrisArt@gmail.com</a>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-phone"></span>
+                        <h3>Phone</h3>
+                        <span>(540) 424-8157</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-home"></span>
+                        <h3>Address</h3>
+                        <span>916 Liberty Street<br />
+                        Fredericksburg, VA 22401<br />
+                        United States of America</span>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+
+</div> <!-- Closing #main -->
+
+
+			<!-- Footer -->
+<footer id="footer">
+	<div class="inner" style="text-align: center; font-family: 'Playfair Display', serif; padding: 2.5em 0;">
+	  <p style="margin-bottom: 0.8em; font-size: 1.2em; font-style: italic; letter-spacing: 0.3px;">
+		Thank You For Supporting Original Art
+	  </p>
+	  <ul class="copyright" style="justify-content: center; gap: 1.5em; font-size: 0.9em; font-style: italic;">
+		<li>&copy; Doricent Web Solutions</li>
+		<li>Design: <a href="https://html5up.net" style="font-style: italic;">HTML5 UP</a></li>
+	  </ul>
+	</div>
+  </footer>
+
+  <script>
+    const gallery = document.getElementById("gallery");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = lightbox.querySelector(".close");
+    const leftArrow = lightbox.querySelector(".arrow.left");
+    const rightArrow = lightbox.querySelector(".arrow.right");
+    const header = document.getElementById("header");
+  
+    let currentIndex = 0;
+  
+    imageList.forEach((imagePath, index) => {
+      const img = document.createElement("img");
+      img.src = imagePath;
+      img.alt = "Oil portrait by Bill Harris";
+      img.dataset.index = index;
+  
+      img.addEventListener("click", () => {
+        currentIndex = index;
+        openLightbox();
+      });
+  
+      gallery.appendChild(img);
+    });
+  
+    function openLightbox() {
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.documentElement.style.position = "fixed";
+      if (header) header.style.display = "none";
+      updateLightboxImage();
+    }
+  
+    function closeLightbox() {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.position = "";
+      document.documentElement.style.position = "";
+      if (header) header.style.display = "";
+    }
+  
+    closeBtn.addEventListener("click", closeLightbox);
+  
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  
+    function updateLightboxImage(direction = "next") {
+      lightboxImg.style.opacity = "0";
+      lightboxImg.style.transform = `translateX(${direction === "next" ? "50px" : "-50px"})`;
+  
+      setTimeout(() => {
+        lightboxImg.src = imageList[currentIndex];
+        lightboxImg.style.opacity = "1";
+        lightboxImg.style.transform = "translateX(0)";
+      }, 150);
+    }
+  
+    leftArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+      updateLightboxImage("prev");
+    });
+  
+    rightArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % imageList.length;
+      updateLightboxImage("next");
+    });
+  
+    // Touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+  
+    lightbox.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+  
+    lightbox.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+  
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+  
+      if (swipeDistance > 50) {
+        // Swiped right → show previous image
+        currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+        updateLightboxImage("prev");
+      } else if (swipeDistance < -50) {
+        // Swiped left → show next image
+        currentIndex = (currentIndex + 1) % imageList.length;
+        updateLightboxImage("next");
+      }
+    }
+  
+    // Ensure transition
+    lightboxImg.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+    
+  
+    // Ensure arrows are always on top
+    leftArrow.style.zIndex = "10000";
+    rightArrow.style.zIndex = "10000";
+    closeBtn.style.zIndex = "10000";
+  </script>
+  
+
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+        <script>
+            const form = document.querySelector("form");
+            const thankYouPopup = document.getElementById("thankYouPopup");
+          
+            form.addEventListener("submit", function (e) {
+              e.preventDefault(); // Prevent default form submission
+          
+              const formData = new FormData(form);
+          
+              fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+              }).then(response => {
+                if (response.ok) {
+                  form.reset();
+                  thankYouPopup.style.display = "block";
+                } else {
+                  console.error("Form submission error");
+                }
+              }).catch(error => {
+                console.error("Submission failed:", error);
+              });
+            });
+          
+            function closePopup() {
+              thankYouPopup.style.display = "none";
+            }
+          </script>
+
+        <!--lazy loading script -->
+        <script>
+          window.addEventListener("load", function() {
+            const images = document.querySelectorAll("img");
+            images.forEach(function(img) {
+              img.setAttribute("loading", "lazy");
+            });
+          });
+        </script>
+
+</body>
+</html>
+
+          
+
+	</body>
+</html>

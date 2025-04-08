@@ -1,0 +1,807 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Paintings</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Explore vibrant oil paintings by Fredericksburg artist Bill Harris. View original fine art pieces full of character and color.">
+		<link rel="stylesheet" href="assets/css/main.css" />
+        <link rel="icon" href="favicons/profile.png">
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* Gallery CSS */
+            .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Flexible columns */
+            gap: 10px; /* Spacing between images */
+            padding: 10px;
+        }
+
+        .gallery img {
+            width: 100%; /* Makes the image fill its container */
+            height: 200px; /* Set a uniform height */
+            object-fit: cover; /* Ensures the image fits without distortion */
+            border-radius: 5px; /* Optional: rounded corners */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: adds shadow for aesthetic */
+            cursor: pointer; /* Indicate clickability */
+        }
+
+        /* Lightbox CSS */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .lightbox .close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+        }
+
+        .lightbox .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .lightbox .arrow.left {
+            left: 10px;
+        }
+
+        .lightbox .arrow.right {
+            right: 10px;
+        }
+
+        body.no-scroll {
+        overflow: hidden;
+    }
+        
+		</style>
+	</head>
+	<body class="is-preload">
+
+		<!-- Wrapper -->
+		<div id="wrapper">
+
+			<!-- Header -->
+			<header id="header" class="alt style2">
+				<a href="index.html" class="logo"><strong>Paintings</strong> <span>Art Collection</span></a>
+				<nav>
+					<a href="#menu">Menu</a>
+				</nav>
+			</header>
+
+			<!-- Menu -->
+			<nav id="menu">
+                <ul class="links">
+                    <li><a href="exhibits.html">Studio</a></li>
+                    <li><a href="portraits.html">Portraits</a></li>
+                    <li><a href="murals.html">Murals</a></li>
+                    <li><a href="illustrations.html">Illustrations</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <ul class="actions stacked">
+                    <li><a href="index.html" class="button primary fit">Home</a></li>
+                    <!-- <li><a href="#" class="button fit">Log In</a></li> -->
+                </ul>
+            </nav>
+
+			<!-- Banner -->
+			<section id="banner" class="style2">
+				<div class="inner">
+					<span class="image">
+						<img src="images/art-banner.jpg" alt="Paintings Banner" />
+					</span>
+					<header class="major">
+						<h1>Paintings</h1>
+					</header>
+					<div class="content">
+						<p>Explore my unique collection of artworks<br /> and discover inspiration.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- Main Gallery Section -->
+			<div id="gallery" class="gallery"></div>
+
+            <!-- Lightbox -->
+<div id="lightbox" class="lightbox">
+  <span class="arrow left">&#10094;</span>
+  <span class="close">&times;</span>
+  <span class="arrow right">&#10095;</span>
+  <img src="" alt="Painting" />
+</div>
+
+            
+        </div>
+
+    <script>
+        // Copy the generated array here
+        const imageList = [
+  "images/paintings/all-i-can-do.jpg",
+  "images/paintings/alley_ways.jpg",
+  "images/paintings/allineed.jpg",
+  "images/paintings/all_but_done.jpg",
+  "images/paintings/all_of_it.jpg",
+  "images/paintings/alone_together.jpg",
+  "images/paintings/along_for_ride.jpg",
+  "images/paintings/amillion_miles.jpg",
+  "images/paintings/anewlife.jpg",
+  "images/paintings/angel-food.jpg",
+  "images/paintings/another-tricky-day.jpg",
+  "images/paintings/anything-or-anyone.jpg",
+  "images/paintings/around_here.jpg",
+  "images/paintings/artattack.jpg",
+  "images/paintings/a_fight_or_two.jpg",
+  "images/paintings/a_new_color.jpg",
+  "images/paintings/back_to_life.jpg",
+  "images/paintings/bear-noir.jpg",
+  "images/paintings/bear_parts.jpg",
+  "images/paintings/begin_again.jpg",
+  "images/paintings/below_zero.jpg",
+  "images/paintings/big_idea.jpg",
+  "images/paintings/bike_crash.jpg",
+  "images/paintings/blend.jpg",
+  "images/paintings/blood-and-roses.jpg",
+  "images/paintings/bloody_mary_sunday.jpg",
+  "images/paintings/blue-in-green.jpg",
+  "images/paintings/blue-monday.jpg",
+  "images/paintings/bluecollarsolitude.jpg",
+  "images/paintings/blue_dog_poster_06 (1).jpg",
+  "images/paintings/blue_horizon.jpg",
+  "images/paintings/blue_moon.jpg",
+  "images/paintings/blustery_day.jpg",
+  "images/paintings/bottles-in-jar.jpg",
+  "images/paintings/braids.jpg",
+  "images/paintings/brand_new_day.jpg",
+  "images/paintings/bright_eyes.jpg",
+  "images/paintings/broken.jpg",
+  "images/paintings/campfire_girl.jpg",
+  "images/paintings/cant_forget_you.jpg",
+  "images/paintings/card_house.jpg",
+  "images/paintings/caroline-and-george.jpg",
+  "images/paintings/center_of_the_universe.jpg",
+  "images/paintings/ceremony.jpg",
+  "images/paintings/changes.jpg",
+  "images/paintings/chips_chair.jpg",
+  "images/paintings/circus_envy.jpg",
+  "images/paintings/closer.jpg",
+  "images/paintings/closing_time.jpg",
+  "images/paintings/collection.jpg",
+  "images/paintings/color_theory.jpg",
+  "images/paintings/consider-me-gone.jpg",
+  "images/paintings/constellations.jpg",
+  "images/paintings/creek_bank.jpg",
+  "images/paintings/cross_eyes_strangers.jpg",
+  "images/paintings/dark_star.jpg",
+  "images/paintings/dawn_over_fredericksburg.jpg",
+  "images/paintings/day_before.jpg",
+  "images/paintings/day_like_today.jpg",
+  "images/paintings/dixie-babylon.jpg",
+  "images/paintings/doesnt_mean_its_there.jpg",
+  "images/paintings/doll_parts.jpg",
+  "images/paintings/drawing_board.jpg",
+  "images/paintings/easytarget.jpg",
+  "images/paintings/everybody_else.jpg",
+  "images/paintings/everythingsfine.jpg",
+  "images/paintings/failure_to_communicate.jpg",
+  "images/paintings/fall_and_falling.jpg",
+  "images/paintings/fall_to_pieces.jpg",
+  "images/paintings/find_the_river.jpg",
+  "images/paintings/finesthour.jpg",
+  "images/paintings/fixed.jpg",
+  "images/paintings/flag-and-boots.jpg",
+  "images/paintings/forever.jpg",
+  "images/paintings/forevernow.jpg",
+  "images/paintings/fractured.jpg",
+  "images/paintings/fredericksburg1949.jpg",
+  "images/paintings/friends-and-enemies.jpg",
+  "images/paintings/front_porch.jpg",
+  "images/paintings/gas-station-1950s.jpg",
+  "images/paintings/ghosts.jpg",
+  "images/paintings/ghost_in_the_wind.jpg",
+  "images/paintings/ghost_in_you.jpg",
+  "images/paintings/girl_next_door.jpg",
+  "images/paintings/gotta-move.jpg",
+  "images/paintings/greater_things.jpg",
+  "images/paintings/great_flood.jpg",
+  "images/paintings/greek_tragedy.jpg",
+  "images/paintings/grey_area.jpg",
+  "images/paintings/grievous_angel.jpg",
+  "images/paintings/guns-and-money.jpg",
+  "images/paintings/half_as_much.jpg",
+  "images/paintings/head_to_toe.jpg",
+  "images/paintings/heart-of-a-sunrise.jpg",
+  "images/paintings/hero.jpg",
+  "images/paintings/hiding_places.jpg",
+  "images/paintings/hightide.jpg",
+  "images/paintings/highwiredays.jpg",
+  "images/paintings/high_tides.jpg",
+  "images/paintings/hooked.jpg",
+  "images/paintings/horseshoes-2012.jpg",
+  "images/paintings/horseshoes_hand_grenades.jpg",
+  "images/paintings/hymn_to_me.jpg",
+  "images/paintings/i-got-mine.jpg",
+  "images/paintings/ice_water_currents.jpg",
+  "images/paintings/idoltime.jpg",
+  "images/paintings/ill_change.jpg",
+  "images/paintings/imaginary-lines.jpg",
+  "images/paintings/IMG_1968.jpeg",
+  "images/paintings/IMG_2147.jpg",
+  "images/paintings/IMG_2148.jpg",
+  "images/paintings/IMG_2149.jpg",
+  "images/paintings/IMG_2150.jpg",
+  "images/paintings/IMG_2151.jpg",
+  "images/paintings/IMG_2152.jpg",
+  "images/paintings/IMG_2153.jpg",
+  "images/paintings/IMG_2154.jpg",
+  "images/paintings/IMG_2155.jpg",
+  "images/paintings/IMG_2156.jpg",
+  "images/paintings/IMG_2157.jpg",
+  "images/paintings/IMG_2158.jpg",
+  "images/paintings/IMG_2159.jpg",
+  "images/paintings/IMG_2160.jpg",
+  "images/paintings/IMG_2161.jpg",
+  "images/paintings/intheflesh.jpg",
+  "images/paintings/invasion.jpg",
+  "images/paintings/invisible_sum.jpg",
+  "images/paintings/i_still_think_of_you.jpg",
+  "images/paintings/joy.jpg",
+  "images/paintings/june.jpg",
+  "images/paintings/just_a_memory.jpg",
+  "images/paintings/just_a_touch.jpg",
+  "images/paintings/kadeana.jpg",
+  "images/paintings/kings_pawns.jpg",
+  "images/paintings/leave_it_to_memory.jpg",
+  "images/paintings/letseat.jpg",
+  "images/paintings/light_years.jpg",
+  "images/paintings/like_myself.jpg",
+  "images/paintings/little-problem.jpg",
+  "images/paintings/little_america.jpg",
+  "images/paintings/little_wing.jpg",
+  "images/paintings/little_wonder.jpg",
+  "images/paintings/living_proof.jpg",
+  "images/paintings/long_goodbye.jpg",
+  "images/paintings/long_view.jpg",
+  "images/paintings/lostgirls.jpg",
+  "images/paintings/lullaby.jpg",
+  "images/paintings/meet_you_anywhere.jpg",
+  "images/paintings/metals_monsters.jpg",
+  "images/paintings/muralist.jpg",
+  "images/paintings/mural_painter.jpg",
+  "images/paintings/my_new_friend.jpg",
+  "images/paintings/new_gospel.jpg",
+  "images/paintings/nothingbuttime.jpg",
+  "images/paintings/only_real_is_real.jpg",
+  "images/paintings/only_we_know.jpg",
+  "images/paintings/only_you_ever_know.jpg",
+  "images/paintings/other_thing.jpg",
+  "images/paintings/oursong.jpg",
+  "images/paintings/painted_evening.jpg",
+  "images/paintings/painting1.jpg",
+  "images/paintings/painting10.jpg",
+  "images/paintings/painting100.jpg",
+  "images/paintings/painting101.jpg",
+  "images/paintings/painting102.jpg",
+  "images/paintings/painting103.jpg",
+  "images/paintings/painting104.jpg",
+  "images/paintings/painting105.jpg",
+  "images/paintings/painting106.jpg",
+  "images/paintings/painting107.jpg",
+  "images/paintings/painting108.jpg",
+  "images/paintings/painting109.jpg",
+  "images/paintings/painting11.jpg",
+  "images/paintings/painting110.jpg",
+  "images/paintings/painting111.jpg",
+  "images/paintings/painting112.jpg",
+  "images/paintings/painting113.jpg",
+  "images/paintings/painting114.jpg",
+  "images/paintings/painting115.jpg",
+  "images/paintings/painting116.jpg",
+  "images/paintings/painting117.jpg",
+  "images/paintings/painting118.jpg",
+  "images/paintings/painting119.jpg",
+  "images/paintings/painting12.jpg",
+  "images/paintings/painting120.jpg",
+  "images/paintings/painting121.jpg",
+  "images/paintings/painting122.jpg",
+  "images/paintings/painting13.jpg",
+  "images/paintings/painting14.jpg",
+  "images/paintings/painting15.jpg",
+  "images/paintings/painting16.jpg",
+  "images/paintings/painting17.jpg",
+  "images/paintings/painting18.jpg",
+  "images/paintings/painting19.jpg",
+  "images/paintings/painting2.jpg",
+  "images/paintings/painting20.jpg",
+  "images/paintings/painting21.jpg",
+  "images/paintings/painting22.jpg",
+  "images/paintings/painting23.jpg",
+  "images/paintings/painting24.jpg",
+  "images/paintings/painting25.jpg",
+  "images/paintings/painting26.jpg",
+  "images/paintings/painting27.jpg",
+  "images/paintings/painting28.jpg",
+  "images/paintings/painting29.jpg",
+  "images/paintings/painting3.jpg",
+  "images/paintings/painting30.jpg",
+  "images/paintings/painting31.jpg",
+  "images/paintings/painting32.jpg",
+  "images/paintings/painting33.jpg",
+  "images/paintings/painting34.jpg",
+  "images/paintings/painting35.jpg",
+  "images/paintings/painting36.jpg",
+  "images/paintings/painting37.jpg",
+  "images/paintings/painting38.jpg",
+  "images/paintings/painting39.jpg",
+  "images/paintings/painting4.jpg",
+  "images/paintings/painting40.jpg",
+  "images/paintings/painting41.jpg",
+  "images/paintings/painting42.jpg",
+  "images/paintings/painting43.jpg",
+  "images/paintings/painting44.jpg",
+  "images/paintings/painting45.jpg",
+  "images/paintings/painting46.jpg",
+  "images/paintings/painting47.jpg",
+  "images/paintings/painting48.jpg",
+  "images/paintings/painting49.jpg",
+  "images/paintings/painting5.jpg",
+  "images/paintings/painting50.jpg",
+  "images/paintings/painting51.jpg",
+  "images/paintings/painting52.jpg",
+  "images/paintings/painting53.jpg",
+  "images/paintings/painting54.jpg",
+  "images/paintings/painting55.jpg",
+  "images/paintings/painting56.jpg",
+  "images/paintings/painting57.jpg",
+  "images/paintings/painting58.jpg",
+  "images/paintings/painting59.jpg",
+  "images/paintings/painting6.jpg",
+  "images/paintings/painting60.jpg",
+  "images/paintings/painting61.jpg",
+  "images/paintings/painting62.jpg",
+  "images/paintings/painting63.jpg",
+  "images/paintings/painting64.jpg",
+  "images/paintings/painting65.jpg",
+  "images/paintings/painting66.jpg",
+  "images/paintings/painting67.jpg",
+  "images/paintings/painting68.jpg",
+  "images/paintings/painting69.jpg",
+  "images/paintings/painting7.jpg",
+  "images/paintings/painting70.jpg",
+  "images/paintings/painting71.jpg",
+  "images/paintings/painting72.jpg",
+  "images/paintings/painting73.jpg",
+  "images/paintings/painting74.jpg",
+  "images/paintings/painting75.jpg",
+  "images/paintings/painting76.jpg",
+  "images/paintings/painting77.jpg",
+  "images/paintings/painting78.jpg",
+  "images/paintings/painting79.jpg",
+  "images/paintings/painting8.jpg",
+  "images/paintings/painting80.jpg",
+  "images/paintings/painting81.jpg",
+  "images/paintings/painting82.jpg",
+  "images/paintings/painting83.jpg",
+  "images/paintings/painting84.jpg",
+  "images/paintings/painting85.jpg",
+  "images/paintings/painting86.jpg",
+  "images/paintings/painting87.jpg",
+  "images/paintings/painting88.jpg",
+  "images/paintings/painting89.jpg",
+  "images/paintings/painting9.jpg",
+  "images/paintings/painting90.jpg",
+  "images/paintings/painting91.jpg",
+  "images/paintings/painting92.jpg",
+  "images/paintings/painting93.jpg",
+  "images/paintings/painting94.jpg",
+  "images/paintings/painting95.jpg",
+  "images/paintings/painting96.jpg",
+  "images/paintings/painting97.jpg",
+  "images/paintings/painting98.jpg",
+  "images/paintings/painting99.jpg",
+  "images/paintings/painting_142.jpg",
+  "images/paintings/pajaro_de_rio.jpg",
+  "images/paintings/pathways.jpg",
+  "images/paintings/peace_and_pieces.jpg",
+  "images/paintings/perfectday.jpg",
+  "images/paintings/perfect_circle.jpg",
+  "images/paintings/picturesofyou.jpg",
+  "images/paintings/plan_b.jpg",
+  "images/paintings/poetry_prose.jpg",
+  "images/paintings/portrait18.jpg",
+  "images/paintings/pretty-warm.jpg",
+  "images/paintings/pump_house.jpg",
+  "images/paintings/puzzle_pieces.jpg",
+  "images/paintings/queen-of-birds.jpg",
+  "images/paintings/queensofheart.jpg",
+  "images/paintings/radiate.jpg",
+  "images/paintings/raze-the-walls.jpg",
+  "images/paintings/rearviewmirror.jpg",
+  "images/paintings/red_boy.jpg",
+  "images/paintings/restaurant.jpg",
+  "images/paintings/rivers_suggestion.jpg",
+  "images/paintings/rocks.jpg",
+  "images/paintings/root_beer_floats.jpg",
+  "images/paintings/saturday_night_sunday_morning.jpg",
+  "images/paintings/scenteroftown.jpg",
+  "images/paintings/sideshow-banner-5x6.jpg",
+  "images/paintings/sky_lights.jpg",
+  "images/paintings/slow_curve.jpg",
+  "images/paintings/small_victory.jpg",
+  "images/paintings/something.jpg",
+  "images/paintings/some_morning_sometime.jpg",
+  "images/paintings/southern-anthem.jpg",
+  "images/paintings/spirits_angels.jpg",
+  "images/paintings/star-bright.jpg",
+  "images/paintings/stay_real_close.jpg",
+  "images/paintings/stick-around-for-the-joy.jpg",
+  "images/paintings/stone_harbor.jpg",
+  "images/paintings/stories.jpg",
+  "images/paintings/sunflowers.jpg",
+  "images/paintings/sure_shot.jpg",
+  "images/paintings/sweet_side.jpg",
+  "images/paintings/symphony.jpg",
+  "images/paintings/tattoo.jpg",
+  "images/paintings/the-well.jpg",
+  "images/paintings/thebigman.jpg",
+  "images/paintings/they_go_away.jpg",
+  "images/paintings/the_comeback.jpg",
+  "images/paintings/the_fires_breathing.jpg",
+  "images/paintings/the_ice_broke.jpg",
+  "images/paintings/the_little_blue_one.jpg",
+  "images/paintings/the_long_way.jpg",
+  "images/paintings/the_tell.jpg",
+  "images/paintings/three_miles.jpg",
+  "images/paintings/tonight_i_dream.jpg",
+  "images/paintings/tonight_we_escape.jpg",
+  "images/paintings/tornado.jpg",
+  "images/paintings/try_to_remember.jpg",
+  "images/paintings/tuesdayspecial.jpg",
+  "images/paintings/turning_tides.jpg",
+  "images/paintings/vanishing_point.jpg",
+  "images/paintings/victorious.jpg",
+  "images/paintings/vintage.jpg",
+  "images/paintings/wasted-and-wounded.jpg",
+  "images/paintings/waters_edge_april.jpg",
+  "images/paintings/what-i-want.jpg",
+  "images/paintings/wings.jpg",
+  "images/paintings/woman_king.jpg",
+  "images/paintings/wonderous-stories.jpg",
+  "images/paintings/work.jpg",
+  "images/paintings/xyou-and-i.jpg",
+  "images/paintings/xyours_and_mine.jpg",
+  "images/paintings/150years.jpg",
+  "images/paintings/3_miles.jpg",
+  "images/paintings/6_03_1.jpg",
+  "images/paintings/6_03_10.jpg",
+  "images/paintings/6_03_11.jpg",
+  "images/paintings/6_03_12.jpg",
+  "images/paintings/6_03_13.jpg",
+  "images/paintings/6_03_14.jpg",
+  "images/paintings/6_03_15.jpg",
+  "images/paintings/6_03_16.jpg",
+  "images/paintings/6_03_17.jpg",
+  "images/paintings/6_03_18.jpg",
+  "images/paintings/6_03_19.jpg",
+  "images/paintings/6_03_2.jpg",
+  "images/paintings/6_03_3.jpg",
+  "images/paintings/6_03_4.jpg",
+  "images/paintings/6_03_5.jpg",
+  "images/paintings/6_03_6.jpg",
+  "images/paintings/6_03_7.jpg",
+  "images/paintings/6_03_8.jpg",
+  "images/paintings/6_03_9.jpg"
+            // ...more images
+        ];
+    </script>
+			</div>
+
+
+<!-- Main -->
+<div id="main">
+
+    <!-- Three -->
+    <section id="three">
+        <div class="inner">
+            <header class="major">
+                <h2>Learn, Create, and Connect</h2>
+            </header>
+            <p>Interested in developing your artistic skills? <br><br> I offer oil painting classes for all experience levels. 
+              Whether you want to explore new techniques, commission a custom piece, or simply learn more about my work, feel free to reach out!
+              </p>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <div class="inner">
+            <section>
+                <form method="post" action="https://formsubmit.co/DDoricent97@gmail.com">
+                    <input type="hidden" name="_captcha" value="false">
+
+                    <div class="fields">
+                        <div class="field half">
+                            <label for="name">Name</label>
+                            <input type="text" name="name" id="name" />
+                        </div>
+                        <div class="field half">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email" required />
+                        </div>
+                        <div class="field">
+                            <label for="message">Message</label>
+                            <textarea name="message" id="message" rows="6"></textarea>
+                        </div>
+                    </div>
+                    <ul class="actions">
+                        <li><input type="submit" value="Send Message" class="primary" /></li>
+                        <li><input type="reset" value="Clear" /></li>
+                    </ul>
+                </form>
+
+                <div id="thankYouPopup" style="
+                        display: none;
+                        position: fixed;
+                        top: 50%;
+                        left: 50%;
+                        transform: translate(-50%, -50%);
+                        background: #1c1c2b;
+                        color: white;
+                        padding: 2em;
+                        border-radius: 8px;
+                        box-shadow: 0 0 20px rgba(0,0,0,0.3);
+                        z-index: 99999;
+                        text-align: center;
+                        font-family: 'Playfair Display', serif;
+                      ">
+                        <p style="font-size: 1.1em; margin-bottom: 1em;">Thank you for your message!</p>
+                        <button onclick="closePopup()" style="
+                          background: white;
+                          color: black;
+                          border: none;
+                          padding: 0.5em 1.5em;
+                          cursor: pointer;
+                          border-radius: 5px;
+                          font-weight: bold;
+                          text-transform: uppercase;
+                          letter-spacing: 1px;
+                        ">Close</button>
+                      </div>
+
+
+            </section>
+            <section class="split">
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-envelope"></span>
+                        <h3>Email</h3>
+                        <a href="mailto:BillHarrisArt@gmail.com">BillHarrisArt@gmail.com</a>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-phone"></span>
+                        <h3>Phone</h3>
+                        <span>(540) 424-8157</span>
+                    </div>
+                </section>
+                <section>
+                    <div class="contact-method">
+                        <span class="icon solid alt fa-home"></span>
+                        <h3>Address</h3>
+                        <span>916 Liberty Street<br />
+                        Fredericksburg, VA 22401<br />
+                        United States of America</span>
+                    </div>
+                </section>
+            </section>
+        </div>
+    </section>
+
+</div> <!-- Closing #main -->
+
+
+			<!-- Footer -->
+<footer id="footer">
+	<div class="inner" style="text-align: center; font-family: 'Playfair Display', serif; padding: 2.5em 0;">
+	  <p style="margin-bottom: 0.8em; font-size: 1.2em; font-style: italic; letter-spacing: 0.3px;">
+		Thank You For Supporting Original Art
+	  </p>
+	  <ul class="copyright" style="justify-content: center; gap: 1.5em; font-size: 0.9em; font-style: italic;">
+		<li>&copy; Doricent Web Solutions</li>
+		<li>Design: <a href="https://html5up.net" style="font-style: italic;">HTML5 UP</a></li>
+	  </ul>
+	</div>
+  </footer>
+
+  <script>
+    const gallery = document.getElementById("gallery");
+    const lightbox = document.getElementById("lightbox");
+    const lightboxImg = lightbox.querySelector("img");
+    const closeBtn = lightbox.querySelector(".close");
+    const leftArrow = lightbox.querySelector(".arrow.left");
+    const rightArrow = lightbox.querySelector(".arrow.right");
+    const header = document.getElementById("header");
+  
+    let currentIndex = 0;
+  
+    imageList.forEach((imagePath, index) => {
+      const img = document.createElement("img");
+      img.src = imagePath;
+      img.alt = "Oil painting by Bill Harris";
+      img.dataset.index = index;
+  
+      img.addEventListener("click", () => {
+        currentIndex = index;
+        openLightbox();
+      });
+  
+      gallery.appendChild(img);
+    });
+  
+    function openLightbox() {
+      lightbox.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      document.body.style.position = "fixed";
+      document.documentElement.style.position = "fixed";
+      if (header) header.style.display = "none";
+      updateLightboxImage();
+    }
+  
+    function closeLightbox() {
+      lightbox.style.display = "none";
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.position = "";
+      document.documentElement.style.position = "";
+      if (header) header.style.display = "";
+    }
+  
+    closeBtn.addEventListener("click", closeLightbox);
+  
+    lightbox.addEventListener("click", (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  
+    function updateLightboxImage(direction = "next") {
+      lightboxImg.style.opacity = "0";
+      lightboxImg.style.transform = `translateX(${direction === "next" ? "50px" : "-50px"})`;
+  
+      setTimeout(() => {
+        lightboxImg.src = imageList[currentIndex];
+        lightboxImg.style.opacity = "1";
+        lightboxImg.style.transform = "translateX(0)";
+      }, 150);
+    }
+  
+    leftArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+      updateLightboxImage("prev");
+    });
+  
+    rightArrow.addEventListener("click", () => {
+      currentIndex = (currentIndex + 1) % imageList.length;
+      updateLightboxImage("next");
+    });
+  
+    // Touch support
+    let touchStartX = 0;
+    let touchEndX = 0;
+  
+    lightbox.addEventListener("touchstart", (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+  
+    lightbox.addEventListener("touchend", (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+  
+    function handleSwipe() {
+      const swipeDistance = touchEndX - touchStartX;
+  
+      if (swipeDistance > 50) {
+        // Swiped right → show previous image
+        currentIndex = (currentIndex - 1 + imageList.length) % imageList.length;
+        updateLightboxImage("prev");
+      } else if (swipeDistance < -50) {
+        // Swiped left → show next image
+        currentIndex = (currentIndex + 1) % imageList.length;
+        updateLightboxImage("next");
+      }
+    }
+  
+    // Ensure transition
+    lightboxImg.style.transition = "opacity 0.3s ease, transform 0.3s ease";
+    
+  
+    // Ensure arrows are always on top
+    leftArrow.style.zIndex = "10000";
+    rightArrow.style.zIndex = "10000";
+    closeBtn.style.zIndex = "10000";
+  </script>
+  
+
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/jquery.scrollex.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+        <script>
+            const form = document.querySelector("form");
+            const thankYouPopup = document.getElementById("thankYouPopup");
+          
+            form.addEventListener("submit", function (e) {
+              e.preventDefault(); // Prevent default form submission
+          
+              const formData = new FormData(form);
+          
+              fetch(form.action, {
+                method: form.method,
+                body: formData,
+                headers: { 'Accept': 'application/json' }
+              }).then(response => {
+                if (response.ok) {
+                  form.reset();
+                  thankYouPopup.style.display = "block";
+                } else {
+                  console.error("Form submission error");
+                }
+              }).catch(error => {
+                console.error("Submission failed:", error);
+              });
+            });
+          
+            function closePopup() {
+              thankYouPopup.style.display = "none";
+            }
+          </script>
+
+
+        <!--lazy loading script -->
+        <script>
+          window.addEventListener("load", function() {
+            const images = document.querySelectorAll("img");
+            images.forEach(function(img) {
+              img.setAttribute("loading", "lazy");
+            });
+          });
+        </script>
+
+</body>
+</html>
+
+          
+
+	</body>
+</html>
